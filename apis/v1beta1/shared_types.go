@@ -140,6 +140,8 @@ type CommonRouteSpec struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=32
 	ParentRefs []ParentReference `json:"parentRefs,omitempty"`
+
+	Services []BackendObjectReference `json:"services,omitempty"`
 }
 
 // PortNumber defines a network port.
