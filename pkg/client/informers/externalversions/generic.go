@@ -62,6 +62,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Gateway().V1alpha2().GatewayClasses().Informer()}, nil
 	case v1alpha2.SchemeGroupVersion.WithResource("httproutes"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Gateway().V1alpha2().HTTPRoutes().Informer()}, nil
+	case v1alpha2.SchemeGroupVersion.WithResource("meshes"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Gateway().V1alpha2().Meshes().Informer()}, nil
 	case v1alpha2.SchemeGroupVersion.WithResource("referencegrants"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Gateway().V1alpha2().ReferenceGrants().Informer()}, nil
 	case v1alpha2.SchemeGroupVersion.WithResource("referencepolicies"):

@@ -66,6 +66,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&GatewayList{},
 		&HTTPRoute{},
 		&HTTPRouteList{},
+		&Mesh{},
+		&MeshList{},
 		&ReferenceGrant{},
 		&ReferenceGrantList{},
 		&ReferencePolicy{},

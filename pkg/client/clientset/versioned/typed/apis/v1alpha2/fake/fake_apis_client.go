@@ -44,6 +44,10 @@ func (c *FakeGatewayV1alpha2) HTTPRoutes(namespace string) v1alpha2.HTTPRouteInt
 	return &FakeHTTPRoutes{c, namespace}
 }
 
+func (c *FakeGatewayV1alpha2) Meshes() v1alpha2.MeshInterface {
+	return &FakeMeshes{c}
+}
+
 func (c *FakeGatewayV1alpha2) ReferenceGrants(namespace string) v1alpha2.ReferenceGrantInterface {
 	return &FakeReferenceGrants{c, namespace}
 }

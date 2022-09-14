@@ -26,6 +26,8 @@ type GatewayClassExpansion interface{}
 
 type HTTPRouteExpansion interface{}
 
+type MeshExpansion interface{}
+
 type ReferenceGrantExpansion interface{}
 
 type ReferencePolicyExpansion interface{}

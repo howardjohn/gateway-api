@@ -46,6 +46,10 @@ type HTTPRouteListerExpansion interface{}
 // HTTPRouteNamespaceLister.
 type HTTPRouteNamespaceListerExpansion interface{}
 
+// MeshListerExpansion allows custom methods to be added to
+// MeshLister.
+type MeshListerExpansion interface{}
+
 // ReferenceGrantListerExpansion allows custom methods to be added to
 // ReferenceGrantLister.
 type ReferenceGrantListerExpansion interface{}
