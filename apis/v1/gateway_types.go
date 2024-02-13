@@ -654,6 +654,82 @@ type GatewayInfrastructure struct {
 	// +optional
 	// +kubebuilder:validation:MaxProperties=8
 	Annotations map[AnnotationKey]AnnotationValue `json:"annotations,omitempty"`
+
+
+	// AllowedChildren allows child objects to attach to this Gateway.
+	// A common scenario is to allow other objects to add listeners to this Gateway.
+	AllowedChildren *AllowedChildren `json:"allowedChildren,omitempty"`
+
+	// AttachTo allows the Gateway to associate itself with another resource.
+	// A common scenario is to reference another Gateway which marks
+	// this Gateway a child of another.
+	AttachTo GatewayObjectReference `json:"attachTo"`
+}
+
+// AllowedChildren defines which objects may be attached as children
+type AllowedChildren struct {
+	// Namespaces indicates namespaces from which children may be attached to this
+	// Gateway. This is restricted to the namespace of this Gateway by default.
+	//
+	// Support: Core
+	//
+	// +optional
+	// +kubebuilder:default={from: Same}
+	Namespaces *ChildrenNamespaces `json:"namespaces,omitempty"`
+}
+
+// ChildrenNamespaces indicate which namespaces Children should be selected from.
+type ChildrenNamespaces struct {
+	// From indicates where Children will be selected for this Gateway. Possible
+	// values are:
+	//
+	// * All: Children in all namespaces may be used by this Gateway.
+	// * Selector: Children in namespaces selected by the selector may be used by
+	//   this Gateway.
+	// * Same: Only Children in the same namespace may be used by this Gateway.
+	//
+	// Support: Core
+	//
+	// +optional
+	// +kubebuilder:default=Same
+	From *FromNamespaces `json:"from,omitempty"`
+
+	// Selector must be specified when From is set to "Selector". In that case,
+	// only Children in Namespaces matching this Selector will be selected by this
+	// Gateway. This field is ignored for other values of "From".
+	//
+	// Support: Core
+	//
+	// +optional
+	Selector *metav1.LabelSelector `json:"selector,omitempty"`
+}
+
+// GatewayObjectReference identifies an API object including its namespace,
+// defaulting to Gateway.
+type GatewayObjectReference struct {
+	// Group is the group of the referent. For example, "gateway.networking.k8s.io".
+	// When unspecified or empty string, core API group is inferred.
+	//
+	// +optional
+	// +kubebuilder:default=""
+	Group *Group `json:"group"`
+
+	// Kind is kind of the referent. For example "Gateway".
+	//
+	// +optional
+	// +kubebuilder:default=Gateway
+	Kind *Kind `json:"kind"`
+
+	// Name is the name of the referent.
+	Name ObjectName `json:"name"`
+
+	// Namespace is the namespace of the referenced object. When unspecified, the local
+	// namespace is inferred.
+	//
+	// Support: Core
+	//
+	// +optional
+	Namespace *Namespace `json:"namespace,omitempty"`
 }
 
 // GatewayConditionType is a type of condition associated with a
