@@ -658,12 +658,14 @@ type GatewayInfrastructure struct {
 
 	// AllowedChildren allows child objects to attach to this Gateway.
 	// A common scenario is to allow other objects to add listeners to this Gateway.
+	// +optional
 	AllowedChildren *AllowedChildren `json:"allowedChildren,omitempty"`
 
 	// AttachTo allows the Gateway to associate itself with another resource.
 	// A common scenario is to reference another Gateway which marks
 	// this Gateway a child of another.
-	AttachTo GatewayObjectReference `json:"attachTo"`
+	// +optional
+	AttachTo *GatewayObjectReference `json:"attachTo"`
 }
 
 // AllowedChildren defines which objects may be attached as children

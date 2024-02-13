@@ -330,8 +330,6 @@ spec:
                       Support: Extended
                     maxProperties: 8
                     type: object
-                required:
-                - attachTo
                 type: object
               listeners:
                 description: |-
@@ -1549,8 +1547,6 @@ spec:
                       Support: Extended
                     maxProperties: 8
                     type: object
-                required:
-                - attachTo
                 type: object
               listeners:
                 description: |-
