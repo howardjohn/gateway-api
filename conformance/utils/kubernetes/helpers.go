@@ -803,6 +803,7 @@ func RouteMustHaveParents(t *testing.T, cli client.Client, timeoutConfig config.
 			return false, fmt.Errorf("error fetching %s: %w", routeTypeName, err)
 		}
 
+		actual = reflect.ValueOf(cliObj).Elem().FieldByName("Status").FieldByName("Parents").Interface().([]v1alpha2.RouteParentStatus)
 		for _, parent := range actual {
 			if err := ConditionsHaveLatestObservedGeneration(metaObj, parent.Conditions); err != nil {
 				tlog.Logf(t, "%s(controller=%v,ref=%#v) %v", routeTypeName, parent.ControllerName, parent, err)
@@ -810,7 +811,6 @@ func RouteMustHaveParents(t *testing.T, cli client.Client, timeoutConfig config.
 			}
 		}
 
-		actual = reflect.ValueOf(cliObj).Elem().FieldByName("Status").FieldByName("Parents").Interface().([]v1alpha2.RouteParentStatus)
 		return parentsForRouteMatch(t, routeName, parents, actual, namespaceRequired), nil
 	})
 	require.NoErrorf(t, waitErr, "error waiting for %s to have parents matching expectations", routeTypeName)
